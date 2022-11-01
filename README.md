@@ -79,3 +79,8 @@ Apache 2.0, see [LICENSE](LICENSE).
 
 [blog]: https://developer.okta.com/blog/2022/08/05/spring-boot-saml
 
+Identifier (Entity ID)http://localhost:8080/saml2/service-provider-metadata/azure
+
+Reply URL (Assertion Consumer Service URL) http://localhost:8080/login/saml2/sso/azure
+
+Sign on URL https://localhost:8080/login/saml2/sso/
