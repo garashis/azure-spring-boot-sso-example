@@ -1,4 +1,5 @@
 spring:
+  scheme: https
   security:
     saml2:
       relyingparty:
@@ -7,4 +8,9 @@ spring:
           azure:
             assertingparty:
               #metadata-uri: https://dev-44683278.okta.com/app/exk6zrznadLtjnq4C5d7/sso/saml/metadata
-              metadata-uri: https://login.microsoftonline.com/c3da75cd-0276-4e14-a2ab-12128bba114c/federationmetadata/2007-06/federationmetadata.xml?appid=5617aabe-6115-4fe9-b1db-ebd49be1855e
+              #metadata-uri: https://login.microsoftonline.com/c3da75cd-0276-4e14-a2ab-12128bba114c/federationmetadata/2007-06/federationmetadata.xml?appid=5617aabe-6115-4fe9-b1db-ebd49be1855e
+              metadata-uri: classpath:federationmetadata.xml
+            # class is Saml2RelyingPartyProperties.java
+            entityId: mySSO
+            acs:
+              location: https://{baseHost}{basePort}{basePath}/login/saml2/sso/{registrationId}
