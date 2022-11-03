@@ -16,6 +16,7 @@ import org.springframework.security.saml2.provider.service.authentication.OpenSa
 import org.springframework.security.saml2.provider.service.authentication.Saml2AuthenticatedPrincipal;
 import org.springframework.security.saml2.provider.service.authentication.Saml2Authentication;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -30,6 +31,9 @@ public class SecurityConfiguration {
 
         // @formatter:off
         http
+//                .exceptionHandling((exceptions) -> exceptions
+//                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/saml2/authenticate/azure"))
+//                )
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/favicon.ico")
                     .permitAll()
