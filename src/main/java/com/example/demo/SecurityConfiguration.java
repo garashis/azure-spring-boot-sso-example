@@ -15,6 +15,7 @@ import org.springframework.security.saml2.provider.service.authentication.OpenSa
 import org.springframework.security.saml2.provider.service.authentication.OpenSaml4AuthenticationProvider.ResponseToken;
 import org.springframework.security.saml2.provider.service.authentication.Saml2AuthenticatedPrincipal;
 import org.springframework.security.saml2.provider.service.authentication.Saml2Authentication;
+import org.springframework.security.saml2.provider.service.web.authentication.Saml2AuthenticationRequestResolver;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
@@ -28,12 +29,14 @@ public class SecurityConfiguration {
 
         OpenSaml4AuthenticationProvider authenticationProvider = new OpenSaml4AuthenticationProvider();
         authenticationProvider.setResponseAuthenticationConverter(groupsConverter());
-
+        LoginUrlAuthenticationEntryPoint loginUrlAuthenticationEntryPoint =  new LoginUrlAuthenticationEntryPoint("/saml2/authenticate/azure");
+        //loginUrlAuthenticationEntryPoint.setForceHttps(true);
+        //loginUrlAuthenticationEntryPoint.setUseForward(true);
         // @formatter:off
         http
-//                .exceptionHandling((exceptions) -> exceptions
-//                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/saml2/authenticate/azure"))
-//                )
+                .exceptionHandling((exceptions) -> exceptions
+                        .authenticationEntryPoint(loginUrlAuthenticationEntryPoint)
+                )
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/favicon.ico")
                     .permitAll()
@@ -41,6 +44,8 @@ public class SecurityConfiguration {
             )
             .saml2Login(saml2 -> saml2
                 .authenticationManager(new ProviderManager(authenticationProvider))
+                           // .getAuthenticationEntryPoint
+                    //.authenticationRequestUri("https://{baseHost}{basePort}{basePath}/login"+ Saml2AuthenticationRequestResolver.DEFAULT_AUTHENTICATION_REQUEST_URI)
             )
             .saml2Logout(withDefaults());
         // @formatter:on

@@ -2,11 +2,13 @@ plugins {
     id 'org.springframework.boot' version '3.0.0-SNAPSHOT'
     id 'io.spring.dependency-management' version '1.0.12.RELEASE'
     id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id "com.jfrog.artifactory" version "4.16.1"
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
@@ -17,9 +19,9 @@ repositories {
 
 dependencies {
     constraints {
-        implementation "org.opensaml:opensaml-core:4.1.1"
-        implementation "org.opensaml:opensaml-saml-api:4.1.1"
-        implementation "org.opensaml:opensaml-saml-impl:4.1.1"
+        implementation "org.opensaml:opensaml-core:4.0.1"
+        implementation "org.opensaml:opensaml-saml-api:4.0.1"
+        implementation "org.opensaml:opensaml-saml-impl:4.0.1"
     }
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'

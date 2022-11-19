@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Spring Boot and SAML</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<h1>Welcome</h1>
+<p>You are successfully logged in as <span sec:authentication="name"></span></p>
+<p>Server time is <span th:text="${time}"></span>.</p>
+
+
+<form th:action="@{/logout}" method="post">
+    <button id="logout" type="submit">Logout</button>
+</form>
+
+</body>
+</html>
